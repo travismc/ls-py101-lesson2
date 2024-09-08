@@ -36,7 +36,8 @@ while invalid_number(num2):
 prompt(f"You entered {num1} and {num2}.")
 
 prompt(
-    "What operation do you want to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide: "
+    """What operation do you want to perform?
+1) Add 2 Subtract 3) Multiply 4) Divide: """
 )
 operation = input()
 
@@ -44,22 +45,20 @@ while operation not in ["1", "2", "3", "4"]:
     prompt("You must choose 1, 2, 3, or 4")
     operation = input()
 
-answer = None
+# output = None
 
 match operation:
     case "1":
-        answer = float(num1) + float(num2)
+        output = float(num1) + float(num2)
     case "2":
-        answer = float(num1) - float(num2)
+        output = float(num1) - float(num2)
     case "3":
-        answer = float(num1) * float(num2)
+        output = float(num1) * float(num2)
     case "4":
-        answer = float(num1) / float(num2)
-    case _:
-        answer = "Invalid selection"
+        output = float(num1) / float(num2)
 
 
-if answer is not None:
-    prompt(f"The result is: {answer}")
+if output is not None:
+    prompt(f"The result is: {output}")
 else:
     prompt("Invalid operation selected.")
