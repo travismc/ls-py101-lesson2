@@ -17,48 +17,59 @@ def invalid_number(num_str):
     return False
 
 
-prompt("Welcome to Calculator!")
+exit = False
+answer = "n"
 
-prompt("What's the first number?")
-num1 = input()
+while exit is False:
+    prompt("Welcome to Calculator!")
 
-while invalid_number(num1):
-    prompt("Hmm... that doesn't look like a valid number.")
+    prompt("What's the first number?")
     num1 = input()
 
-prompt("What's the second number?")
-num2 = input()
+    while invalid_number(num1):
+        prompt("Hmm... that doesn't look like a valid number.")
+        num1 = input()
 
-while invalid_number(num2):
-    prompt("Hmm... that doesn't look like a valid number.")
+    prompt("What's the second number?")
     num2 = input()
 
-prompt(f"You entered {num1} and {num2}.")
+    while invalid_number(num2):
+        prompt("Hmm... that doesn't look like a valid number.")
+        num2 = input()
 
-prompt(
-    """What operation do you want to perform?
-1) Add 2 Subtract 3) Multiply 4) Divide: """
-)
-operation = input()
+    prompt(f"You entered {num1} and {num2}.")
 
-while operation not in ["1", "2", "3", "4"]:
-    prompt("You must choose 1, 2, 3, or 4")
+    prompt(
+        """What operation do you want to perform?
+    1) Add 2 Subtract 3) Multiply 4) Divide: """
+    )
     operation = input()
 
-# output = None
+    while operation not in ["1", "2", "3", "4"]:
+        prompt("You must choose 1, 2, 3, or 4")
+        operation = input()
 
-match operation:
-    case "1":
-        output = float(num1) + float(num2)
-    case "2":
-        output = float(num1) - float(num2)
-    case "3":
-        output = float(num1) * float(num2)
-    case "4":
-        output = float(num1) / float(num2)
+    # output = None
 
+    match operation:
+        case "1":
+            output = float(num1) + float(num2)
+        case "2":
+            output = float(num1) - float(num2)
+        case "3":
+            output = float(num1) * float(num2)
+        case "4":
+            output = float(num1) / float(num2)
 
-if output is not None:
-    prompt(f"The result is: {output}")
-else:
-    prompt("Invalid operation selected.")
+    if output is not None:
+        prompt(f"The result is: {output}")
+    else:
+        prompt("Invalid operation selected.")
+
+    prompt("Would you like to perform another calculation? (y/n) ")
+    answer = input()
+
+    if answer == "n":
+        break
+    else:
+        continue
