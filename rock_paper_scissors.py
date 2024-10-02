@@ -1,58 +1,49 @@
-# Walk-through: Rock Paper Scissors
-# In this assignment, we'll build a Rock Paper Scissors game. 
-# Rock Paper Scissors is a simple game played between two opponents. 
-# Both opponents choose an item from rock, paper, or scissors. 
-# The winner is decided according to the following rules:
-
-# If player a chooses rock and player b chooses scissors, player a wins.
-# If player a chooses paper and player b chooses rock, player a wins.
-# If player a chooses scissors and player b chooses paper, player a wins.
-# If both players choose the same item, neither player wins. It's a tie.
-# Our version of the game lets the user play against the computer. The game flow should go like this:
-
-# The user makes a player.
-# The computer makes a player.
-# The winner is displayed.
-
 import random
 
-VALID_CHOICES = ['rock', 'paper', 'scissors']
+VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
+
+WINNING_COMBOS = {
+    'rock': ['scissors', 'lizard'],
+    'paper': ['rock', 'spock'],
+    'scissors': ['paper', 'lizard'],
+    'lizard': ['paper', 'spock'],
+    'spock': ['rock', 'scissors']
+}
+
 
 def prompt(message):
-	print(f'===> {message}')
+    print(f'===> {message}')
 
-def display_winner(player, computer):
-	if player == computer:
-		prompt("It's a tie!")
-	elif ((player == 'rock' and computer == 'scissors') or
-		(player == 'paper' and computer == 'rock') or 
-		(player == 'scissors' and computer == 'paper')):
-		prompt('You win!')
-	else:
-		prompt('You lose!')
+
+def player_wins(player_choice, computer_choice):
+    if computer_choice in WINNING_COMBOS[player_choice]:
+        prompt("You win!")
+    else:
+        prompt("You lose!")
+
 
 while True:
-	prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
-	choice = input()
+    prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
+    player_choice = input()
 
-	while choice not in VALID_CHOICES:
-		prompt("That's not a valid choice.")
-		choice = input().lower()
+    while player_choice not in VALID_CHOICES:
+        prompt("That's not a valid choice.")
+        choice = input().lower()
 
-	computer_choice = random.choice(VALID_CHOICES)
+    computer_choice = random.choice(VALID_CHOICES)
 
-	prompt(f'You chose {choice}, computer chose {computer_choice}')
+    prompt(f'You chose {player_choice}, computer chose {computer_choice}')
 
-	display_winner(choice, computer_choice)
+    player_wins(player_choice, computer_choice)
 
-	prompt("Do you want to play again? (y/n) ")
-	answer = input().lower()
-	while True:
-		if answer.startswith('n') or answer.startswith('y'):
-				break
-		
-		prompt('Please enter "y" or "n".')
-		answer = input().lower()
+    prompt("Do you want to play again? (y/n) ")
+    answer = input().lower()
+    while True:
+        if answer.startswith('n') or answer.startswith('y'):
+            break
 
-	if answer[0] == 'n':
-		break
+        prompt('Please enter "y" or "n".')
+        answer = input().lower()
+
+    if answer[0] == 'n':
+        break
